@@ -73,6 +73,16 @@ CREATE TABLE `transaction_pool` (
   KEY `size` (`size`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=COMPRESSED;
 
+CREATE TABLE `transaction_pool_details` (
+  `txnHash` varchar(64) NOT NULL,
+  `keyImage` varchar(64) NOT NULL,
+  `keyOffsets varchar(64) NOT NULL,
+  `amount` bigint(20) unsigned NOT NULL,
+  `inOut` int(1) NOT NULL,
+  PRIMARY KEY (`txnHash`,`keyImage`),
+  KEY `inOut` (`inOut`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=COMPRESSED;
+
 CREATE TABLE `transaction_outputs_index_maximums` (
   `amount` bigint(20) NOT NULL,
   `globalIndex` bigint(20) NOT NULL,
