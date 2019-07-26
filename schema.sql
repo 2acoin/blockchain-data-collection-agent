@@ -73,7 +73,7 @@ CREATE TABLE `transaction_pool` (
   KEY `size` (`size`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=COMPRESSED;
 
-CREATE TABLE `transaction_pool_details` (
+CREATE TABLE `transaction_pool_detail` (
   `txnHash` varchar(64) NOT NULL,
   `keyImage` varchar(64) NOT NULL,
   `keyOffsets varchar(64) NOT NULL,
