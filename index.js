@@ -48,6 +48,9 @@ timer.pause = true
 /* Timer to fire to get the transaction pool information */
 const transactionPoolTimer = new Metronome(5000)
 
+/* Timer to fire to get the transaction pool detail information */
+const transactionPoolDetailTimer = new Metronome(5000)
+
 /* Timer to fire to get the network information */
 const informationTimer = new Metronome(5000)
 
@@ -160,8 +163,7 @@ timer.on('tick', () => {
   })
 })
 
-/* Let's go grab the transaction pool from the daemon and save
-   it in the database */
+/* Let's go grab the transaction pool from the daemon and save it in the database */
 transactionPoolTimer.on('tick', () => {
   transactionPoolTimer.pause = true
   var txnCount
@@ -174,6 +176,22 @@ transactionPoolTimer.on('tick', () => {
   }).catch((error) => {
     log('[WARN] Could not save transaction pool [Are you sure you started with the blockexplorer enabled?]: ' + error)
     transactionPoolTimer.pause = false
+  })
+})
+
+/* Let's go grab the transaction pool details from the daemon and save it in the database */
+transactionPoolDetailTimer.on('tick', () => {
+  transactionPoolDetailTimer.pause = true
+  var detailCount
+  collector.getPoolChangesLite({tailBlockHash: topKnownBlockHash, knownTransactionHashes: []}).then((details) => {
+    detailCount = details.addedTxs.length
+    return database.saveTransactionPoolDetail(details)
+  }).then(() => {
+    log('[INFO] Saved current transaction pool details for (' + detailCount + ' transactions)')
+    transactionPoolDetailTimer.pause = false
+  }).catch((error) => {
+    log('[WARN] Could not save transaction pool details [Are you sure you started with the blockexplorer enabled?]: ' + error)
+    transactionPoolDetailTimer.pause = false
   })
 })
 
