@@ -76,7 +76,7 @@ CREATE TABLE `transaction_pool` (
 CREATE TABLE `transaction_pool_detail` (
   `txnHash` varchar(64) NOT NULL,
   `keyImage` varchar(64) NOT NULL,
-  `keyOffsets varchar(64) NOT NULL,
+  `keyOffsets` varchar(64) NOT NULL,
   `amount` bigint(20) unsigned NOT NULL,
   `inOut` int(1) NOT NULL,
   PRIMARY KEY (`txnHash`,`keyImage`),

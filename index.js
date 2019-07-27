@@ -183,6 +183,7 @@ transactionPoolTimer.on('tick', () => {
 transactionPoolDetailTimer.on('tick', () => {
   transactionPoolDetailTimer.pause = true
   var detailCount
+  var topKnownBlockHash = 'ac4ad2ed1ba6ddf692b9f52501c1d3e519e96b6cc2c4071149d80741d45b6d85'
   collector.getPoolChangesLite({tailBlockHash: topKnownBlockHash, knownTransactionHashes: []}).then((details) => {
     detailCount = details.addedTxs.length
     return database.saveTransactionPoolDetail(details)
