@@ -46,10 +46,10 @@ const timer = new Metronome(2000)
 timer.pause = true
 
 /* Timer to fire to get the transaction pool information */
-const transactionPoolTimer = new Metronome(5000)
+const transactionPoolTimer = new Metronome(15000)
 
 /* Timer to fire to get the transaction pool detail information */
-const transactionPoolDetailTimer = new Metronome(5000)
+const transactionPoolDetailTimer = new Metronome(15000)
 
 /* Timer to fire to get the network information */
 const informationTimer = new Metronome(5000)
